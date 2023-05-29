@@ -48,9 +48,9 @@ Vector1 Gravity(Particle *particle){
 }
 
 void StartphysicsEngine(){
-    float totaltime = 10;
+    float totaltime = 10; // run for 10 sec
     float currenttime = 0;
-    float dt = 1;
+    float dt = 1; //each step will be of 1 second
 
     intializeParticle();
     Printparticles();
