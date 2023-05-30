@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
-#define NUM_RIGID_BODY 1
+#define NUM_RIGID_BODY 2
 #define M_PI 3.14
 
 // 2d vector
@@ -101,6 +101,30 @@ RunRigidSimulation(){
         PrintRigidBodies();
         currentTime += dt;
     }
+}
+
+typedef struct{
+    float x;
+    float y;
+}Vector2;
+
+typedef struct{
+    Vector2 min;
+    Vector2 max;
+}AABB;
+
+int TestAABBOverlap(AABB *a, AABB *b){
+    float d1x = b->min.x - a->max.x;
+    float d1y = b->min.y - a->max.y;
+    float d2x = a->min.x - b->max.x;
+    float d2y = a->min.y - b->max.y;
+
+    if (d1x > 0.0f || d1y > 0.0f)
+        return 0;
+    if (d2x > 0.0f || d2y > 0.0f)
+        return 0;
+
+    return 1;
 }
 
 int main(){
